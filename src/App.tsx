@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ProductSelectionPage from './features/product_selection/ProductSelectionPage'
+import ProductDetailsPage from './features/product_details/ProductDetailsPage'
+import Header from './core/components/Header'
+
+// Create theme with Rakuten colors
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#bf0000', // Rakuten red
+    },
+    secondary: {
+      main: '#ffffff',
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  },
+});
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ThemeProvider theme={theme}>
+      <Router>
+          <Header />
+            <Routes>
+              <Route path="/" element={<ProductSelectionPage />} />
+              <Route path="/product/:productId" element={<ProductDetailsPage />} />
+            </Routes>
+      </Router>
+    </ThemeProvider>
   )
 }
 
