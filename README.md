@@ -14,7 +14,7 @@ It uses MUI for styling.
 
 ## To run the project :
 ### Install the required packages 
-- run npm install
+- npm install
 
 ### Run the development server :
 - npm run dev
